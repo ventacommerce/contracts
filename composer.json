@@ -1,0 +1,23 @@
+{
+    "name": "venta/contracts",
+    "description": "Venta eCommerce Framework Contracts package",
+    "authors": [
+        {
+            "name": "Konstantins Zukovs",
+            "email": "kz@scandiweb.com"
+        },
+        {
+            "name": "Raivis Vitols",
+            "email": "raivis@scandiweb.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Venta\\Contracts\\": "src/"
+        }
+    },
+    "minimum-stability": "stable",
+    "require-dev": {
+        "phpunit/phpunit": "5.2"
+    }
+}
