@@ -8,7 +8,7 @@ namespace Venta\Contracts\ExtensionsLoader;
  *
  * @package Venta\Contracts
  */
-interface PartialLoaderContract
+interface TypedLoaderContract
 {
     /**
      * Main loading function, called by extensions loader
@@ -16,5 +16,5 @@ interface PartialLoaderContract
      * @param  \Venta\Contracts\ExtensionsLoader\ExtensionProviderContract[] $providers
      * @return mixed
      */
-    public function load($providers);
+    public function collect($providers);
 }

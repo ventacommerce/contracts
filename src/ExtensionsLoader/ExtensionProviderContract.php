@@ -14,9 +14,10 @@ interface ExtensionProviderContract
      * Array is expected as an output of this function,
      * where key is container alias and value is concrete to bind
      *
+     * @param  \Venta\ExtensionsLoader\Collectors\BindingsCollector $container
      * @return array
      */
-    public function bindings();
+    public function bindings($container);
 
     /**
      * Returns array with provided commands and console configuration

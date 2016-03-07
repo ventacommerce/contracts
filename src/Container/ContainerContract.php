@@ -2,6 +2,9 @@
 
 namespace Venta\Contracts\Container;
 
+use Interop\Container\Exception\ContainerException;
+use Interop\Container\Exception\NotFoundException;
+
 /**
  * Container interface
  *
@@ -42,7 +45,7 @@ interface ContainerContract extends \Interop\Container\ContainerInterface
      * @param  array  $arguments
      * @return mixed
      */
-    public function call($method, $arguments = []);
+    public function call($method, array $arguments = []);
 
     /**
      * Performs rewrite of existing definition in container

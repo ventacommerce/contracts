@@ -24,4 +24,13 @@ interface ExtensionsLoaderContract
      * @return void
      */
     public function addExtensionProvider($provider);
+
+    /**
+     * Add typed loader to extensions provider
+     *
+     * @param  string $type
+     * @param  string $loader
+     * @return void
+     */
+    public function addLoader($type, $loader);
 }
