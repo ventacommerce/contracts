@@ -14,11 +14,11 @@ interface ConfigurationLoaderContract extends Arrayable
     /**
      * Add configuration reader to loader
      *
-     * @param  \Venta\Contracts\Configuration\ConfigurationReaderContract $reader
+     * @param  \Venta\Contracts\Configuration\ConfigurationSourceContract $reader
      * @param  int $priority
      * @return void
      */
-    public function addReader(ConfigurationReaderContract $reader, $priority = 0);
+    public function addSource(ConfigurationSourceContract $reader, $priority = 0);
 
     /**
      * Perform reading of all configuration available

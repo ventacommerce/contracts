@@ -9,7 +9,7 @@ use Venta\Contracts\Support\Arrayable;
  *
  * @package Venta\Contracts
  */
-interface ConfigurationReaderContract extends Arrayable
+interface ConfigurationSourceContract extends Arrayable
 {
     /**
      * Returns reader name
@@ -27,4 +27,12 @@ interface ConfigurationReaderContract extends Arrayable
      * @return array
      */
     public function read(array $data = []);
+
+    /**
+     * {@inheritdoc}
+     *
+     * @param  array $data
+     * @return array
+     */
+    public function toArray(array $data = []);
 }
