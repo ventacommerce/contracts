@@ -9,7 +9,7 @@ use Venta\Contracts\Extensions\ManagerContract;
  *
  * @package Venta\Contracts
  */
-interface MethodContract
+interface MethodContract extends ExtensionManagerAwareContract
 {
     /**
      * Defines method name
@@ -21,31 +21,14 @@ interface MethodContract
     /**
      * Returns array of arguments to be passed into called method
      *
-     * @return array
+     * @return mixed|array|null
      */
-    public function getArguments(): array;
+    public function getArguments();
 
     /**
-     * Normalises data for returning result.
-     * This method receives same arguments, returned from static::getArguments() method.
-     * Return value of this method will be returned as call result
+     * Returns method name as usable string for calling on object
      *
-     * @param  mixed $arguments
-     * @return mixed
+     * @return string
      */
-    public function getReturnValue(...$arguments);
-
-    /**
-     * Extensions manager setter
-     *
-     * @param  ManagerContract $manager
-     */
-    public function setExtensionsManager(ManagerContract $manager);
-
-    /**
-     * Extensions manager getter
-     *
-     * @return ManagerContract
-     */
-    public function getExtensionManager(): ManagerContract;
+    public function getMethodName(): string;
 }
