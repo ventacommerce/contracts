@@ -1,54 +1,55 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Venta\Contracts\Application;
 
+use Venta\Contracts\Container\ContainerAwareContract;
+use Venta\Contracts\Extensions\ExtensionManagerAwareContract;
+
 /**
- * Application interface
+ * Interface ApplicationContract
  *
- * @package Venta\Contracts
+ * @package Venta\Contracts\Application
  */
-interface ApplicationContract
+interface ApplicationContract extends ExtensionManagerAwareContract, ContainerAwareContract
 {
     /**
-     * Construct function
-     * If options as passed as a string, then it is assumed base path only is passed
-     *
-     * @param string|array $options
+     * Application boot function
+     * Called first in a row, while launching application
      */
-    public function __construct($options = []);
-
-    /**
-     * Returns application root path
-     *
-     * @param  null|mixed $postfix
-     * @return string
-     */
-    public function path($postfix = null);
+    public function boot();
 
     /**
      * Returns application version
      *
      * @return string
      */
-    public function version();
+    public function version(): string;
+
+    /**
+     * Returns application path
+     * Argument is added to that path string, if passed
+     *
+     * @param  string $addition
+     * @return string
+     */
+    public function path(string $addition = ''): string;
 
     /**
      * Bind item to container
      *
      * @param  string $alias
-     * @param  mixed  $item
-     * @return void
+     * @param  mixed  $concrete
+     * @param  bool   $shared
      */
-    public function bind($alias, $item);
+    public function bind(string $alias, $concrete, bool $shared = false);
 
     /**
      * Bind shared item to container
      *
      * @param  string $alias
-     * @param  mixed  $item
-     * @return void
+     * @param  mixed  $concrete
      */
-    public function share($alias, $item);
+    public function share(string $alias, $concrete);
 
     /**
      * Returns an item from container
@@ -56,25 +57,16 @@ interface ApplicationContract
      * @param  string $alias
      * @return mixed
      */
-    public function make($alias);
-
-    /**
-     * Performs rewrite of existing definition in container
-     *
-     * @param  string $alias
-     * @param  mixed $item
-     * @return void
-     */
-    public function rewrite($alias, $item);
+    public function make(string $alias);
 
     /**
      * Resolves out of container and calls method on passed class and returns result
      *
-     * @param  string $method
+     * @param  mixed $method
      * @param  array  $arguments
      * @return mixed
      */
-    public function call($method, $arguments = []);
+    public function call($method, array $arguments = []);
 
     /**
      * Defines, if binding exists in container
@@ -82,26 +74,15 @@ interface ApplicationContract
      * @param  string $alias
      * @return bool
      */
-    public function has($alias);
+    public function has(string $alias): bool;
 
     /**
-     * Defines environment name
-     *
-     * @return string
-     */
-    public function environment();
-
-    /**
-     * Runs application
-     *
-     * @return void
+     * Application run function
      */
     public function run();
 
     /**
      * Function called on application termination
-     *
-     * @return void
      */
     public function terminate();
 }
