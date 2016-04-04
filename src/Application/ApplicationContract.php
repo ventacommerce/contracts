@@ -77,6 +77,13 @@ interface ApplicationContract extends ExtensionManagerAwareContract, ContainerAw
     public function has(string $alias): bool;
 
     /**
+     * Returns path to extension providers file
+     *
+     * @return string
+     */
+    public function getExtensionProvidersFile(): string;
+
+    /**
      * Application run function
      */
     public function run();
