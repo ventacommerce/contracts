@@ -2,6 +2,8 @@
 
 namespace Venta\Contracts\Event;
 
+use Ds\PriorityQueue;
+
 /**
  * Interface EventContract
  *
@@ -14,9 +16,9 @@ interface EventContract
      * Insuring event can be constructed with name and observers
      *
      * @param string $name
-     * @param array $observers
+     * @param PriorityQueue|null $observers
      */
-    public function __construct(string $name, array $observers = []);
+    public function __construct(string $name, PriorityQueue $observers = null);
 
     /**
      * Returns event name
