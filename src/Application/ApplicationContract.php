@@ -2,29 +2,22 @@
 
 namespace Venta\Contracts\Application;
 
-use Venta\Contracts\Container\ContainerAwareContract;
-use Venta\Contracts\Extensions\ExtensionManagerAwareContract;
+use Interop\Container\ContainerInterface;
 
 /**
  * Interface ApplicationContract
  *
  * @package Venta\Contracts\Application
  */
-interface ApplicationContract extends ExtensionManagerAwareContract, ContainerAwareContract
+interface ApplicationContract extends ContainerInterface
 {
-    /**
-     * Application boot function
-     * Called first in a row, while launching application
-     */
-    public function boot();
-
     /**
      * Returns application version
      *
      * @return string
      */
     public function version(): string;
-
+    
     /**
      * Returns application path
      * Argument is added to that path string, if passed
@@ -32,8 +25,39 @@ interface ApplicationContract extends ExtensionManagerAwareContract, ContainerAw
      * @param  string $addition
      * @return string
      */
-    public function path(string $addition = ''): string;
+    public function path(string $addition = null): string;
 
+    /**
+     * Add application affector
+     *
+     * @param  AffectorContract $affector
+     * @return $this
+     */
+    public function addApplicationAffector(AffectorContract $affector);
+
+    /**
+     * Returns application singleton instance
+     *
+     * @return ApplicationContract
+     */
+    public static function getInstance(): ApplicationContract;
+
+    /**
+     * Application boot function
+     * Called first in a row, while launching application
+     */
+    public function boot();
+
+    /**
+     * Application run function
+     */
+    public function run();
+
+    /**
+     * Function called on application termination
+     */
+    public function terminate();
+    
     /**
      * Bind item to container
      *
@@ -67,29 +91,4 @@ interface ApplicationContract extends ExtensionManagerAwareContract, ContainerAw
      * @return mixed
      */
     public function call($method, array $arguments = []);
-
-    /**
-     * Defines, if binding exists in container
-     *
-     * @param  string $alias
-     * @return bool
-     */
-    public function has(string $alias): bool;
-
-    /**
-     * Returns path to extension providers file
-     *
-     * @return string
-     */
-    public function getExtensionProvidersFile(): string;
-
-    /**
-     * Application run function
-     */
-    public function run();
-
-    /**
-     * Function called on application termination
-     */
-    public function terminate();
 }

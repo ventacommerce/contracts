@@ -12,16 +12,23 @@ use Venta\Contracts\Event\EventContract;
 interface AffectorContract
 {
     /**
-     * Main affector function
+     * Function, called on application booting
      *
-     * @param ApplicationContract $application
+     * @param  ApplicationContract $application
      */
-    public function affect(ApplicationContract $application);
+    public function booting(ApplicationContract $application);
 
     /**
-     * Wrapper for affect function, in order to make it callable
+     * Function, called on application run
      *
-     * @param EventContract $event
+     * @param  ApplicationContract $application
      */
-    public function __invoke(EventContract $event);
+    public function run(ApplicationContract $application);
+
+    /**
+     * Function, called on application terminate
+     *
+     * @param  ApplicationContract $application
+     */
+    public function terminate(ApplicationContract $application);
 }
