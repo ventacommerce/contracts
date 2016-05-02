@@ -16,9 +16,8 @@ interface EventContract
      * Insuring event can be constructed with name and observers
      *
      * @param string $name
-     * @param PriorityQueue|null $observers
      */
-    public function __construct(string $name, PriorityQueue $observers = null);
+    public function __construct(string $name);
 
     /**
      * Returns event name
