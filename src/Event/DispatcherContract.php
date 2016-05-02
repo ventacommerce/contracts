@@ -25,9 +25,10 @@ interface DispatcherContract
      *
      * @param  string $name
      * @param  array $arguments
+     * @param  callable $stepCallback
      * @return EventContract
      */
-    public function dispatch(string $name, array $arguments = []): EventContract;
+    public function dispatch(string $name, array $arguments = [], callable $stepCallback = null): EventContract;
 
     /**
      * Returns observers array for an event
