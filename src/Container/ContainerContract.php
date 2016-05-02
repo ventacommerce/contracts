@@ -1,42 +1,57 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Venta\Contracts\Container;
-
-use Interop\Container\Exception\ContainerException;
-use Interop\Container\Exception\NotFoundException;
 
 /**
  * Container interface
  *
- * @package Venta\Contracts
+ * @package Venta\Contracts\Container
  */
-interface ContainerContract extends \Interop\Container\ContainerInterface
+interface ContainerContract
 {
     /**
-     * Add definition to container
+     * Bind item to container
      *
      * @param  string $alias
-     * @param  mixed $concrete
-     * @return void
+     * @param  mixed $item
+     * @param  bool $share
+     * @throws \InvalidArgumentException
      */
-    public function bind($alias, $concrete);
+    public function bind(string $alias, $item, bool $share = false);
 
     /**
-     * Add shared definition to container
+     * Bind a singleton to container
      *
      * @param  string $alias
-     * @param  mixed $concrete
-     * @return void
+     * @param  mixed  $item
      */
-    public function share($alias, $concrete);
+    public function share(string $alias, $item);
+
+    /**
+     * Defines, if alias exists in container
+     *
+     * @param  string $alias
+     * @return bool
+     */
+    public function has(string $alias): bool;
 
     /**
      * Convenient wrapper for get function
      *
      * @param  string $alias
+     * @param  array  $arguments
      * @return mixed
      */
-    public function make($alias);
+    public function make(string $alias, array $arguments = []);
+
+    /**
+     * Returns item out of container
+     *
+     * @param  string $id
+     * @param  array $arguments
+     * @return mixed
+     */
+    public function get($id, array $arguments = []);
 
     /**
      * Resolves out of container and calls method on passed class and returns result
@@ -48,11 +63,18 @@ interface ContainerContract extends \Interop\Container\ContainerInterface
     public function call($method, array $arguments = []);
 
     /**
-     * Performs rewrite of existing definition in container
+     * Tag container items for resolving at once
      *
-     * @param  string $alias
-     * @param  mixed $item
-     * @return void
+     * @param  array $items
+     * @param  string $tag
      */
-    public function rewrite($alias, $item);
+    public function tag(array $items, string $tag);
+
+    /**
+     * Returns resolved all tagged items as an array
+     *
+     * @param  string $tag
+     * @return array
+     */
+    public function tagged(string $tag): array;
 }
