@@ -77,4 +77,20 @@ interface ContainerContract
      * @return array
      */
     public function tagged(string $tag): array;
+
+    /**
+     * Add callback to object resolving
+     *
+     * @param  string $className
+     * @param  \Closure $callback
+     */
+    public function resolving(string $className, \Closure $callback);
+
+    /**
+     * Function, launched after item is resolved
+     *
+     * @param string $className
+     * @param \Closure $callback
+     */
+    public function resolved(string $className, \Closure $callback = null);
 }
