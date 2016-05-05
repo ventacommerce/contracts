@@ -92,5 +92,5 @@ interface ContainerContract
      * @param string $className
      * @param \Closure $callback
      */
-    public function resolved(string $className, \Closure $callback = null);
+    public function resolved(string $className, \Closure $callback);
 }

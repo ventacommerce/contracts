@@ -39,4 +39,11 @@ interface ItemContract
      * @return mixed
      */
     public function getResolvingItem();
+
+    /**
+     * Callbacks manager setter
+     *
+     * @param CallbackManagerContract $manager
+     */
+    public function setCallbacksManager(CallbackManagerContract $manager);
 }
