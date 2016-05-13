@@ -63,6 +63,15 @@ interface ContainerContract
     public function call($method, array $arguments = []);
 
     /**
+     * Aliases container item with another name
+     *
+     * @param  string $alias
+     * @param  string $containerItem
+     * @throws \InvalidArgumentException
+     */
+    public function alias(string $alias, string $containerItem);
+
+    /**
      * Tag container items for resolving at once
      *
      * @param  array $items
